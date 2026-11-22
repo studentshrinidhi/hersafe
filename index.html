@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeHer | Women Safety Application</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <i class="fa-solid fa-shield-heart"></i>
+        SafeHer
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#explore">Explore</a>
+        <a href="#services">Services</a>
+        <a href="#safety">Safety</a>
+    </nav>
+
+    <button class="location-btn" onclick="getLocation()">
+        <i class="fa-solid fa-location-dot"></i>
+        My Location
+    </button>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <span class="tag">YOUR SAFETY, OUR PRIORITY</span>
+
+        <h1>Travel freely.<br>
+        <span>Stay Safe.</span></h1>
+
+        <p>
+            Explore your surroundings, discover nearby essential
+            services and make informed travel decisions.
+        </p>
+
+        <div class="search-box">
+            <input type="text" id="destination"
+                   placeholder="Search destination or place...">
+
+            <button onclick="searchLocation()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
+        </div>
+
+        <p id="locationStatus" class="status">
+            Enable location to explore nearby services.
+        </p>
+    </div>
+
+    <div class="hero-image">
+        <i class="fa-solid fa-shield-heart"></i>
+        <h2>Your journey matters.</h2>
+        <p>Stay informed. Stay connected.</p>
+    </div>
+</section>
+
+<section class="services" id="services">
+
+    <div class="section-heading">
+        <span>EXPLORE YOUR SURROUNDINGS</span>
+        <h2>Everything you need, in one place</h2>
+        <p>Find important services near your location.</p>
+    </div>
+
+    <div class="service-grid">
+
+        <button class="service-card" onclick="findNearby('police')">
+            <i class="fa-solid fa-building-shield"></i>
+            <h3>Police Stations</h3>
+            <p>Nearby police assistance</p>
+        </button>
+
+        <button class="service-card" onclick="findNearby('hospital')">
+            <i class="fa-solid fa-hospital"></i>
+            <h3>Hospitals</h3>
+            <p>Medical assistance nearby</p>
+        </button>
+
+        <button class="service-card" onclick="findNearby('restaurant')">
+            <i class="fa-solid fa-utensils"></i>
+            <h3>Restaurants</h3>
+            <p>Find nearby restaurants</p>
+        </button>
+
+        <button class="service-card" onclick="findNearby('hotel')">
+            <i class="fa-solid fa-hotel"></i>
+            <h3>Hotels</h3>
+            <p>Find accommodation</p>
+        </button>
+
+        <button class="service-card" onclick="findNearby('mall')">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <h3>Shopping Malls</h3>
+            <p>Nearby shopping places</p>
+        </button>
+
+        <button class="service-card" onclick="findNearby('pharmacy')">
+            <i class="fa-solid fa-prescription-bottle-medical"></i>
+            <h3>Pharmacies</h3>
+            <p>Nearby medical stores</p>
+        </button>
+
+        <button class="service-card" onclick="findNearby('government')">
+            <i class="fa-solid fa-landmark"></i>
+            <h3>Government Buildings</h3>
+            <p>Public service locations</p>
+        </button>
+
+        <button class="service-card" onclick="findNearby('streetlight')">
+            <i class="fa-solid fa-lightbulb"></i>
+            <h3>Streetlights</h3>
+            <p>Mapped streetlight information</p>
+        </button>
+
+    </div>
+</section>
+
+<section class="explore" id="explore">
+
+    <div class="section-heading">
+        <span>LIVE LOCATION SERVICES</span>
+        <h2>Explore the map</h2>
+        <p>Discover roads and essential services around you.</p>
+    </div>
+
+    <div class="map-layout">
+
+        <div class="map-panel">
+            <div class="map-toolbar">
+                <h3><i class="fa-solid fa-map"></i> SafeHer Map</h3>
+                <button onclick="getLocation()">Locate Me!</button>
+            </div>
+
+            <div id="map"></div>
+        </div>
+
+        <div class="places-panel">
+            <h3>Nearby Places</h3>
+            <p id="resultCount">Select a category to explore.</p>
+
+            <div id="placesList">
+                <div class="empty-state">
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                    <p>Your nearby places will appear here.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="safety-section" id="safety">
+
+    <div>
+        <span>EMERGENCY SUPPORT</span>
+        <h2>Your safety comes first.</h2>
+        <p>
+            If you are in immediate danger, contact emergency services.
+            You can also contact your trusted people.
+        </p>
+    </div>
+
+    <div class="emergency-box">
+        <i class="fa-solid fa-phone-volume"></i>
+        <h3>Emergency Helpline</h3>
+        <p>India Emergency Response Number</p>
+
+        <a href="tel:112" class="sos-btn">
+            
+            CALL 112
+        </a>
+
+        <button class="secondary-btn" onclick="shareLocation()">
+            Share My Location
+        </button>
+    </div>
+
+</section>
+
+<section class="assistant-section">
+    <h2><i class="fa-solid fa-robot"></i> SafeHer Assistant</h2>
+    <p>Need help finding nearby services?</p>
+
+    <div class="assistant-input">
+        <input id="assistantQuestion"
+               placeholder="Ask about nearby hospitals, police stations...">
+        <button onclick="askAssistant()">Ask</button>
+    </div>
+
+    <div id="assistantAnswer"></div>
+</section>
+
+<footer>
+    <h2><i class="fa-solid fa-shield-heart"></i> SafeHer</h2>
+    <p>Travel freely. Stay informed. Stay safe.</p>
+    <p>Emergency assistance in India: 112</p>
+    <small>SafeHer is an informational tool, not a replacement for emergency services.</small>
+
+<section class="report-section">
+    <h2>Report a Safety Issue</h2>
+    <p>Help make your area safer by reporting problems.</p>
+
+    <select id="reportCategory">
+        <option value="streetlight">Streetlight Problem</option>
+        <option value="unsafe_road">Unsafe Road</option>
+        <option value="road_damage">Road Damage</option>
+        <option value="other">Other</option>
+    </select>
+
+    <textarea
+        id="reportDescription"
+        placeholder="Describe the problem..."
+    ></textarea>
+
+    <button onclick="submitSafetyReport()">
+        Submit Report
+    </button>
+
+    <p id="reportStatus"></p>
+
+    <h3>Community Safety Reports</h3>
+    <div id="communityReports"></div>
+</section>
+
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
